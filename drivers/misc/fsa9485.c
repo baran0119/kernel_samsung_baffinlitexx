@@ -1908,7 +1908,7 @@ static void fsa9485_work_cb(struct work_struct *work)
 
 	/* FSA9485 : Read interrupt -> Read Device
 
-	/* read and clear interrupt status bits */
+	   read and clear interrupt status bits */
 	fsa9485_read_word_reg(client, FSA9485_REG_INT1,&intr);
 	//fsa9485_read_reg(client, FSA9485_REG_INT2,&intr2);
 	fsa9485_read_reg(client, FSA9485_REG_DEV_T1,&val1);
