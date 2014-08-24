@@ -19,6 +19,7 @@
 #include <linux/compat.h>
 #include <linux/uaccess.h>
 #include <linux/mount.h>
+#include <linux/dcache.h>
 
 #include "f2fs.h"
 #include "node.h"
@@ -114,7 +115,17 @@ static int get_parent_ino(struct inode *inode, nid_t *pino)
 	struct dentry *dentry;
 
 	inode = igrab(inode);
-	dentry = d_find_any_alias(inode);
+
+	/* Alex - the following is equivalent to: dentry = d_find_any_alias(inode); */
+	dentry = NULL;
+	spin_lock(&inode->i_lock);
+	if (!list_empty(&inode->i_dentry)) {
+		dentry = list_first_entry(&inode->i_dentry,
+					  struct dentry, d_alias);
+		dget(dentry);
+	}
+	spin_unlock(&inode->i_lock);
+
 	iput(inode);
 	if (!dentry)
 		return 0;
@@ -620,7 +631,7 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	{
 		unsigned int oldflags;
 
-		ret = mnt_want_write_file(filp);
+		ret = mnt_want_write(filp->f_path.mnt);
 		if (ret)
 			return ret;
 
@@ -657,7 +668,7 @@ long f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		inode->i_ctime = CURRENT_TIME;
 		mark_inode_dirty(inode);
 out:
-		mnt_drop_write_file(filp);
+		mnt_drop_write(filp->f_path.mnt);
 		return ret;
 	}
 	default:
