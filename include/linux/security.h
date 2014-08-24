@@ -25,7 +25,6 @@
 #include <linux/key.h>
 #include <linux/capability.h>
 #include <linux/slab.h>
-#include <linux/xattr.h>
 #include <linux/err.h>
 
 struct linux_binprm;
@@ -1710,9 +1709,6 @@ void security_inode_free(struct inode *inode);
 int security_inode_init_security(struct inode *inode, struct inode *dir,
 				 const struct qstr *qstr,
 				 initxattrs initxattrs, void *fs_data);
-int security_new_inode_init_security(struct inode *inode, struct inode *dir,
-				 const struct qstr *qstr,
-				 initxattrs initxattrs, void *fs_data);
 int security_old_inode_init_security(struct inode *inode, struct inode *dir,
 				     const struct qstr *qstr, char **name,
 				     void **value, size_t *len);
@@ -2014,15 +2010,6 @@ static inline int security_inode_init_security(struct inode *inode,
 						struct inode *dir,
 						const struct qstr *qstr,
 						const initxattrs initxattrs,
-						void *fs_data)
-{
-	return 0;
-}
-
-static inline int security_new_inode_init_security(struct inode *inode,
-						struct inode *dir,
-						const struct qstr *qstr,
-						initxattrs initxattrs,
 						void *fs_data)
 {
 	return 0;

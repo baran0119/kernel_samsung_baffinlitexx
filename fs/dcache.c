@@ -1523,7 +1523,7 @@ static struct dentry * __d_find_any_alias(struct inode *inode)
  * If any aliases exist for the given inode, take and return a
  * reference for one of them.  If no aliases exist, return %NULL.
  */
-struct dentry * d_find_any_alias(struct inode *inode)
+struct dentry *d_find_any_alias(struct inode *inode)
 {
 	struct dentry *de;
 
