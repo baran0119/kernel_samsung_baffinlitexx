@@ -150,17 +150,13 @@ static inline int freezer_should_skip(struct task_struct *p)
 	__retval;							\
 })
 
-#define wait_event_freezable(wq, condition)				\
-({									\
-	int __retval;							\
-	for (;;) {							\
-		__retval = wait_event_interruptible(wq, 		\
-				(condition) || freezing(current));	\
-		if (__retval || (condition))				\
-			break;						\
-		try_to_freeze();					\
-	}								\
-	__retval;							\
+#define wait_event_freezable(wq, condition)								\
+({																		\
+	int __retval;														\
+	freezer_do_not_count();												\
+	__retval = wait_event_interruptible(wq, (condition));				\
+	freezer_count();													\
+	__retval;															\
 })
 
 #define wait_event_freezable_timeout(wq, condition, timeout)		\
@@ -175,6 +171,15 @@ static inline int freezer_should_skip(struct task_struct *p)
 		try_to_freeze();					\
 	}								\
 	__retval;							\
+})
+
+#define wait_event_freezable_exclusive(wq, condition)					\
+({																		\
+	int __retval;														\
+	freezer_do_not_count();												\
+	__retval = wait_event_interruptible_exclusive(wq, condition);		\
+	freezer_count();													\
+	__retval;															\
 })
 
 #else /* !CONFIG_FREEZER */
@@ -205,7 +210,10 @@ static inline void set_freezable(void) {}
 
 #define wait_event_freezable_timeout(wq, condition, timeout)		\
 		wait_event_interruptible_timeout(wq, condition, timeout)
-
+		
+#define wait_event_freezable_exclusive(wq, condition)				\
+		wait_event_interruptible_exclusive(wq, condition)
+		
 #define wait_event_freezekillable(wq, condition)		\
 		wait_event_killable(wq, condition)
 
