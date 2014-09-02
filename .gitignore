@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 
 <!-- saved from url=(0088)https://raw.githubusercontent.com/pawitp/android_kernel_samsung_i9082/cm-11.0/.gitignore -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#
+=======
+#
+>>>>>>> 5ccc91c... Add .gitignore files
 # NOTE! Don't add files that are generated in specific
 # subdirectories here. Add them in the ".gitignore" file
 # in that subdirectory instead.
@@ -38,7 +42,10 @@ modules.builtin
 #
 # Top-level generic files
 #
+<<<<<<< HEAD
 /build
+=======
+>>>>>>> 5ccc91c... Add .gitignore files
 /tags
 /TAGS
 /linux
@@ -49,6 +56,14 @@ modules.builtin
 /Module.symvers
 
 #
+<<<<<<< HEAD
+=======
+# Debian directory (make deb-pkg)
+#
+/debian/
+
+#
+>>>>>>> 5ccc91c... Add .gitignore files
 # git files that we don't want to ignore even it they are dot-files
 #
 !.gitignore
@@ -82,4 +97,21 @@ GTAGS
 *.orig
 *~
 \#*#
+<<<<<<< HEAD
 </pre></body></html>
+=======
+
+# generated caf
+arch/arm/mach-msm/smd_rpc_sym.c
+
+# compressed boot files
+arch/arm/boot/compressed/ashldi3.S
+arch/arm/boot/compressed/lib1funcs.S
+arch/arm/boot/compressed/piggy.gzip
+arch/arm/boot/compressed/piggy.xzkern
+arch/arm/boot/compressed/vmlinux
+
+# ignore initramfs
+initramfs
+/*.sh
+>>>>>>> 5ccc91c... Add .gitignore files
