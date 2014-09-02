@@ -5,7 +5,7 @@
 # -Werror treats warnings as errors
 # -std=c++0x is the planned new c++ standard
 # -std=c++98 is the 1998 c++ standard
-CFLAGS += -O3 -Wall -fno-exceptions -pthread -MMD -DETCDIR=\"/etc\" -Ilibsensors
+CFLAGS += -O3 -Wall -fno-exceptions -MMD -DETCDIR=\"/etc\" -Ilibsensors
 CXXFLAGS += -fno-rtti
 ifeq ($(WERROR),1)
 	CFLAGS += -Werror
