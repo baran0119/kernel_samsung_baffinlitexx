@@ -2942,12 +2942,14 @@ CONFIG_IIO_CONSUMERS_PER_TRIGGER=2
 # CONFIG_IIO_GPIO_TRIGGER is not set
 # CONFIG_IIO_SYSFS_TRIGGER is not set
 # CONFIG_IIO_SIMPLE_DUMMY is not set
-# CONFIG_ZSMALLOC is not set
 # CONFIG_FB_SM7XX is not set
 # CONFIG_USB_ENESTORAGE is not set
 # CONFIG_BCM_WIMAX is not set
 # CONFIG_FT1000 is not set
-
+CONFIG_ZSMALLOC=y
+CONFIG_ZRAM=y
+# CONFIG_ZRAM_DEBUG is not set
+	
 #
 # Speakup console speech
 #
