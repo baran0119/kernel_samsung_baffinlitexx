@@ -101,7 +101,7 @@ DHDCFLAGS += -DWL_SUPPORT_BACKPORTED_KPATCHES
 # m: module type driver
 # y: built-in type driver
 ##########################
-DRIVER_TYPE ?= y
+DRIVER_TYPE ?= m
 
 #########################
 # Chip dependent feature
